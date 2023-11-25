@@ -348,7 +348,9 @@ half4 SSAO(Varyings input) : SV_Target
     float2 uv = input.texcoord;
     // Early Out for Sky...
     float rawDepth_o = SampleDepth(uv);
+    // Unity深度为反向存储, 因此小于0.01表示是天空
     if (rawDepth_o < SKY_DEPTH_VALUE)
+        //(0, 0.5, 0.5, 0.5)?
         return PackAONormal(HALF_ZERO, HALF_ZERO);
 
     // Early Out for Falloff
